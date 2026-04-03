@@ -61,10 +61,25 @@ body {
   cursor: text;
 }
 .input { color: var(--text-color); margin-bottom: 5px; }
-.output { color: var(--text-color); margin-bottom: 15px; white-space: pre-wrap; }
-.input-line { display: flex; align-items: center; }
+.output {
+  color: var(--text-color);
+  margin-bottom: 15px;
+  white-space: pre-wrap;
+  word-break: break-word; /* 🟢 NUEVO: Fuerza a romper palabras largas como URLs */
+}
+.input-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* 🟢 NUEVO: Permite que si la pantalla es muy pequeña, el input pase a la línea de abajo */
+}
 .prompt { color: var(--prompt-color); margin-right: 10px; font-weight: bold; }
 input {
-  background: transparent; border: none; color: var(--text-color);
-  font-family: inherit; font-size: inherit; outline: none; flex-grow: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+  flex-grow: 1;
+  min-width: 0; /* 🟢 NUEVO: Impide que el input tenga un ancho mínimo que rompa el móvil */
 }
