@@ -1,5 +1,12 @@
 /* style.css */
 :root {
+  /* Tema por defecto (Dark) */
+  --bg-color: #1e1e1e;
+  --text-color: #cccccc;
+  --prompt-color: #4af626;
+}
+
+[data-theme="dark"] {
   --bg-color: #1e1e1e;
   --text-color: #cccccc;
   --prompt-color: #4af626;
@@ -15,8 +22,28 @@
   --bg-color: #000000;
   --text-color: #00ff00;
   --prompt-color: #00ff00;
+  text-shadow: 0 0 5px #00ff00; /* Le da un efecto neón extra */
 }
 
+[data-theme="dracula"] {
+  --bg-color: #282a36;
+  --text-color: #f8f8f2;
+  --prompt-color: #ff79c6;
+}
+
+[data-theme="ubuntu"] {
+  --bg-color: #300a24;
+  --text-color: #ffffff;
+  --prompt-color: #8ae234;
+}
+
+[data-theme="retro"] {
+  --bg-color: #0000aa; /* Azul clásico de DOS */
+  --text-color: #aaaaaa;
+  --prompt-color: #ffff55;
+}
+
+/* ... el resto del CSS que ya tenías (body, .terminal, .input, etc.) se queda igual ... */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -26,44 +53,18 @@ body {
   height: 100vh;
   box-sizing: border-box;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave al cambiar de tema */
 }
 
-/* Contenedor principal */
 .terminal {
   min-height: 100%;
-  cursor: text; /* Hace que toda la pantalla parezca un input de texto */
+  cursor: text;
 }
-
-/* Historial de comandos */
-.input {
-  color: var(--text-color);
-  margin-bottom: 5px;
-}
-
-.output {
-  color: var(--text-color);
-  margin-bottom: 15px;
-  white-space: pre-wrap; /* Respeta los saltos de línea si los pones en las respuestas */
-}
-
-/* La línea donde escribe el usuario */
-.input-line {
-  display: flex;
-  align-items: center;
-}
-
-.prompt {
-  color: var(--prompt-color);
-  margin-right: 10px;
-  font-weight: bold;
-}
-
+.input { color: var(--text-color); margin-bottom: 5px; }
+.output { color: var(--text-color); margin-bottom: 15px; white-space: pre-wrap; }
+.input-line { display: flex; align-items: center; }
+.prompt { color: var(--prompt-color); margin-right: 10px; font-weight: bold; }
 input {
-  background: transparent;
-  border: none;
-  color: var(--text-color);
-  font-family: inherit;
-  font-size: inherit;
-  outline: none;
-  flex-grow: 1; /* Hace que el input ocupe el resto del ancho de la pantalla */
+  background: transparent; border: none; color: var(--text-color);
+  font-family: inherit; font-size: inherit; outline: none; flex-grow: 1;
 }
