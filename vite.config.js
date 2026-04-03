@@ -3,5 +3,5 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/about-me/' // 🟢 AHORA SE LLAMA ASÍ
+  base: '/about-me/'
 })

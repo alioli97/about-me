@@ -5,10 +5,8 @@ const currentLang = ref('en')
 const inputCommand = ref('')
 const inputRef = ref(null)
 
-// Lista de temas disponibles
 const availableThemes = ['dark', 'light', 'matrix', 'dracula', 'ubuntu', 'retro']
 
-// 1. Actualizamos el diccionario con los mensajes del tema
 const i18n = {
   en: {
     welcome: 'Welcome to Arnau Alió Parull\'s interactive CV. Type "help" to see available commands.',
@@ -86,13 +84,12 @@ const handleCommand = async () => {
   const rawInput = inputCommand.value.trim().toLowerCase()
   if (!rawInput) return
 
-  history.value.push({ type: 'input', text: `invitado@arnaualio:~$ ${rawInput}` })
+  history.value.push({ type: 'input', text: `guest@arnaualio:~$ ${rawInput}` })
 
   const args = rawInput.split(' ')
   const cmd = args[0]
   const arg = args[1]
 
-  // --- LÓGICA CORE ---
   if (cmd === 'clear') {
     history.value = []
   } 
@@ -104,7 +101,6 @@ const handleCommand = async () => {
       history.value.push({ type: 'output', text: i18n[currentLang.value].langError })
     }
   } 
-  // 🟢 AQUÍ ESTÁ EL NUEVO COMANDO THEME
   else if (cmd === 'theme') {
     if (arg && availableThemes.includes(arg)) {
       document.body.setAttribute('data-theme', arg)
@@ -132,27 +128,20 @@ const handleCommand = async () => {
     document.body.setAttribute('data-theme', 'matrix')
     history.value.push({ type: 'output', text: i18n[currentLang.value].easterEggs.matrix })
   }
-  
-  // --- COMANDO NO ENCONTRADO ---
   else {
     const errorMsg = i18n[currentLang.value].notFound.replace('{cmd}', cmd)
     history.value.push({ type: 'output', text: errorMsg })
   }
 
-  // Limpiar input y esperar a que Vue pinte el HTML
   inputCommand.value = ''
   await nextTick()
   
-  // Buscar todos los comandos que ha escrito el usuario (tienen la clase 'input')
   const historialInputs = document.querySelectorAll('.input')
   
   if (historialInputs.length > 0) {
-    // Coger el último comando que acabas de escribir
     const ultimoComando = historialInputs[historialInputs.length - 1]
-    // Hacer scroll suave para que ese comando quede en la parte superior de la pantalla
     ultimoComando.scrollIntoView({ behavior: 'smooth', block: 'start' })
   } else {
-    // Fallback por si el usuario usa el comando 'clear' (el historial se queda a 0)
     window.scrollTo(0, 0)
   }
 }
@@ -165,7 +154,7 @@ const handleCommand = async () => {
     </div>
     
     <div class="input-line">
-      <span class="prompt">invitado@arnaualio:~$</span>
+      <span class="prompt">guest@arnaualio:~$</span>
       <input 
         ref="inputRef"
         v-model="inputCommand" 
