@@ -139,9 +139,22 @@ const handleCommand = async () => {
     history.value.push({ type: 'output', text: errorMsg })
   }
 
+  // Limpiar input y esperar a que Vue pinte el HTML
   inputCommand.value = ''
   await nextTick()
-  window.scrollTo(0, document.body.scrollHeight)
+  
+  // Buscar todos los comandos que ha escrito el usuario (tienen la clase 'input')
+  const historialInputs = document.querySelectorAll('.input')
+  
+  if (historialInputs.length > 0) {
+    // Coger el último comando que acabas de escribir
+    const ultimoComando = historialInputs[historialInputs.length - 1]
+    // Hacer scroll suave para que ese comando quede en la parte superior de la pantalla
+    ultimoComando.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  } else {
+    // Fallback por si el usuario usa el comando 'clear' (el historial se queda a 0)
+    window.scrollTo(0, 0)
+  }
 }
 </script>
 
