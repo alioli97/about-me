@@ -52,3 +52,22 @@ Want to run this project on your own machine? It's super easy:
 1. Clone the repository:
    ```bash
    git clone [https://github.com/tu-usuario/about-me.git](https://github.com/tu-usuario/about-me.git)
+
+2. Navigate to the project directory:
+   ```bash
+   cd about-me
+
+3. Install dependencies:
+   ```bash
+   npm install
+
+4. Start the development server:
+   ```bash
+   npm run dev
+
+## 👨‍💻 Author
+Arnau Alió Parull
+
+LinkedIn: www.linkedin.com/in/arnaualio
+
+Feel free to reach out if you have any questions or just want to say hi!
